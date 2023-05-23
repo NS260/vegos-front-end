@@ -1,0 +1,11 @@
+<div *ngFor="let article of articles" >
+  {{article.name}}
+  <br>{{article.category}}
+  <br>{{article.publishedDate}}
+  <br><img src="{{article.photoUrl}}" alt="article image"> {{article.photoUrl}}
+  <br>{{article.userComment}}
+  <br>{{article.rate}}
+  <br><img src="{{article.user.imageUrl}}" alt="user profile image"> {{article.user.imageUrl}}
+  <br>{{article.user.name}} {{article.user.surname}}
+  <br>{{article.user.userRole}}
+</div>
