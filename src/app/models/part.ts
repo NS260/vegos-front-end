@@ -1,5 +1,5 @@
 export interface Part {
-  id: number
+  id?: number
   header: string
   text: string
 }

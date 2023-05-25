@@ -1,0 +1,20 @@
+<h3>Add Article</h3>
+<form (ngSubmit)="onSubmit()">
+  <div>
+    <label>Name</label>
+    <input type="text" id="name" [(ngModel)]="article.name" name="name">
+  </div>
+  <div>
+    <label>Category</label>
+    <input type="text" id="category" [(ngModel)]="article.category" name="category">
+  </div>
+  <div>
+    <label>User comment</label>
+    <input type="text" id="userComment" [(ngModel)]="article.userComment" name="userComment">
+  </div>
+  <div>
+    <label>Photo url</label>
+    <input type="text" id="photoUrl" [(ngModel)]="article.photoUrl" name="photoUrl">
+  </div>
+  <button type="submit"></button>
+</form>

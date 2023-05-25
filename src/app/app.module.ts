@@ -10,6 +10,10 @@ import {MentorsComponent} from './components/mentors/mentors.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {RouterLink} from "@angular/router";
+import {CreateArticleComponent} from './components/articles/create-article/create-article.component';
+import {UpdateArticleComponent} from './components/articles/update-article/update-article.component';
+import {AppRoutingModule} from "./app-routing.module";
+import { ArticleDetailsComponent } from './components/articles/article-details/article-details.component';
 
 @NgModule({
   declarations: [
@@ -18,14 +22,18 @@ import {RouterLink} from "@angular/router";
     SidebarComponent,
     ArticlesComponent,
     CoursesComponent,
-    MentorsComponent
+    MentorsComponent,
+    CreateArticleComponent,
+    UpdateArticleComponent,
+    ArticleDetailsComponent
   ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        FormsModule,
-        RouterLink
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    RouterLink
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,39 @@
+<h3>View Article</h3>
+
+<div>
+  <div>
+    <label><b>Name:</b></label> {{article.name}}
+  </div>
+  <div>
+    <label><b>Rate:</b></label> {{article.rate}}
+  </div>
+  <div>
+    <label><b>Photo:</b></label> {{article.photoUrl}}
+  </div>
+  <div>
+    <label><b>Publication date:</b></label> {{article.publishedDate | date}}
+  </div>
+  <div>
+    <label><b>Category:</b></label> {{article.category}}
+  </div>
+  <div>
+    <label><b>User comment:</b></label> {{article.userComment}}
+  </div>
+  <div>
+    <label><b>Info:</b></label> {{article.user.name}} {{article.user.surname}} {{article.user.userRole}}
+  </div>
+  <div>
+    <label><b>Image:</b></label> {{article.user.imageUrl}}
+  </div>
+  <div>
+    <label><b>Type:</b></label> {{article.articleType}}
+  </div>
+  <div *ngFor="let part of article.parts">
+    <div>
+      <label><b>Header:</b></label> {{part.header}}
+    </div>
+    <div>
+      <label><b>Content:</b></label> {{part.text}}
+    </div>
+  </div>
+</div>

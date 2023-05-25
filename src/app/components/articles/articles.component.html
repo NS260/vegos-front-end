@@ -1,11 +1,15 @@
-<div *ngFor="let article of articles" >
-  {{article.name}}
-  <br>{{article.category}}
-  <br>{{article.publishedDate}}
+<div *ngFor="let article of articles">
+  <br><br>
+  Name: {{article.name}}
+  <br>Category: {{article.category}}
+  <br>Date: {{article.publishedDate | date}}
   <br><img src="{{article.photoUrl}}" alt="article image"> {{article.photoUrl}}
-  <br>{{article.userComment}}
-  <br>{{article.rate}}
+  <br>Comment: {{article.userComment}}
+  <br>Rate: {{article.rate}}
   <br><img src="{{article.user.imageUrl}}" alt="user profile image"> {{article.user.imageUrl}}
-  <br>{{article.user.name}} {{article.user.surname}}
-  <br>{{article.user.userRole}}
+  <br>User info: {{article.user.name}} {{article.user.surname}}
+  <br>Role: {{article.user.userRole}}
+  <button (click)="updateArticle(article.id)">Update</button>
+  <button (click)="deleteArticle(article.id)">Delete</button>
+  <button (click)="viewArticle(article.id)">View</button>
 </div>
