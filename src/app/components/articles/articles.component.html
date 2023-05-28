@@ -1,15 +1,23 @@
-<div *ngFor="let article of articles">
-  <br><br>
-  Name: {{article.name}}
-  <br>Category: {{article.category}}
-  <br>Date: {{article.publishedDate | date}}
-  <br><img src="{{article.photoUrl}}" alt="article image"> {{article.photoUrl}}
-  <br>Comment: {{article.userComment}}
-  <br>Rate: {{article.rate}}
-  <br><img src="{{article.user.imageUrl}}" alt="user profile image"> {{article.user.imageUrl}}
-  <br>User info: {{article.user.name}} {{article.user.surname}}
-  <br>Role: {{article.user.userRole}}
-  <button (click)="updateArticle(article.id)">Update</button>
-  <button (click)="deleteArticle(article.id)">Delete</button>
-  <button (click)="viewArticle(article.id)">View</button>
-</div>
+<ng-container *ngFor="let article of articles" class="card">
+  <mat-card>
+    <mat-divider></mat-divider>
+    <mat-card-content style="text-align: right">
+      <mat-card-header style="text-align: left">
+        <mat-card-title>{{article.name}}
+          <span style="color: fuchsia">{{article.rate}}<mat-icon svgIcon="rate-star"></mat-icon> </span>
+        </mat-card-title>
+        <mat-card-subtitle>{{article.category}} {{article.publishedDate| date}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-title>{{article.user.name}} {{article.user.surname}}</mat-card-title>
+      <mat-card-subtitle>{{article.userComment}}</mat-card-subtitle>
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-card-actions style="justify-content: center">
+        <mat-icon svgIcon="edit-article" (click)="updateArticle(article.id)">Update</mat-icon>
+        <mat-icon svgIcon="delete-article" (click)="deleteArticle(article.id)">Delete</mat-icon>
+        <mat-icon svgIcon="view-article" (click)="viewArticle(article.id)">View</mat-icon>
+      </mat-card-actions>
+    </mat-card-footer>
+  </mat-card>
+</ng-container>
+

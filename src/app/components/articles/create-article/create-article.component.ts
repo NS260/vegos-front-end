@@ -1,36 +1,36 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Article} from "../../../models/article";
 import {ArticleService} from "../../../services/article.service";
 import {User} from "../../../models/user";
 import {Router} from "@angular/router";
+import { FormBuilder, FormControl,Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-create-article',
   templateUrl: './create-article.component.html',
   styleUrls: ['./create-article.component.css']
 })
-export class CreateArticleComponent implements OnInit {
+export class CreateArticleComponent {
   article: Article = new Article();
   user: User = {
-    age: undefined,
-    email: undefined,
-    imageUrl: undefined,
-    info: undefined,
-    jobTitle: undefined,
-    language: undefined,
-    mobilePhone: undefined,
-    name: undefined,
-    password: undefined,
-    status: undefined,
-    surname: undefined,
-    userRole: undefined,
     id: undefined
   };
 
-  constructor(private service: ArticleService, private router: Router) {
-  }
+  nameGroup = this.fb.group({
+    name: ['', [Validators.required, Validators.minLength(10)]],
+  });
+  categoryGroup = this.fb.group({
+    category: ['', Validators.required],
+  });
+  userCommentGroup = this.fb.group({
+    userComment: new FormControl('', [Validators.required, Validators.minLength(10)])
+  });
+  photoGroup = this.fb.group({
+    photoURL: new FormControl('', [Validators.required,
+      Validators.pattern("(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})")])
+  });
 
-  ngOnInit(): void {
+  constructor(private service: ArticleService, private router: Router, private fb: FormBuilder) {
   }
 
   setValues(): void {
@@ -38,11 +38,14 @@ export class CreateArticleComponent implements OnInit {
     this.article.articleType = 'USER_ARTICLE';
     this.article.rate = 1;
     this.article.user = this.user;
+    this.article.name = this.nameGroup.value.name;
+    this.article.category = this.categoryGroup.value.category?.toUpperCase();
+    this.article.userComment = this.userCommentGroup.value.userComment;
+    this.article.photoUrl = this.photoGroup.value.photoURL;
   }
 
   onSubmit() {
     this.setValues();
-    console.log(this.article);
     this.saveArticle();
   }
 
@@ -53,7 +56,6 @@ export class CreateArticleComponent implements OnInit {
   saveArticle(): void {
     this.service.createArticle(this.article).subscribe({
       next: (val) => {
-        console.log(val);
         this.redirectToArticlesPage();
       },
       error: (err) => {

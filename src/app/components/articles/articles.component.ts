@@ -2,6 +2,9 @@ import {ArticleService} from "../../services/article.service";
 import {Article} from "../../models/article";
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
+import {MatIconRegistry} from "@angular/material/icon";
+import {DomSanitizer} from "@angular/platform-browser";
+import {Utils} from "../../utils/Utils";
 
 @Component({
   selector: 'app-articles',
@@ -11,7 +14,11 @@ import {Router} from "@angular/router";
 export class ArticlesComponent implements OnInit {
   articles: Article[] = [];
 
-  constructor(private service: ArticleService, private router: Router) {
+  constructor(private service: ArticleService, private router: Router, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+    iconRegistry.addSvgIcon('edit-article', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/edit-icon.svg'));
+    iconRegistry.addSvgIcon('delete-article', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/remove-icon.svg'));
+    iconRegistry.addSvgIcon('view-article', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/view-icon.svg'));
+    iconRegistry.addSvgIcon('rate-star', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/star-icon.svg'));
   }
 
   ngOnInit(): void {
@@ -20,7 +27,10 @@ export class ArticlesComponent implements OnInit {
 
   getArticles(): void {
     this.service.getArticles().subscribe({
-      next: (val: any) => this.articles = val._embedded?.articleDTOes
+      next: (val: any) => {
+        this.articles = val._embedded?.articleDTOes
+        this.articles.forEach(val => val.category = Utils.mapString(val.category))
+      }
     });
   }
 

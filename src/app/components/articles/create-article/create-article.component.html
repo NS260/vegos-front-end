@@ -1,20 +1,85 @@
-<h3>Add Article</h3>
-<form (ngSubmit)="onSubmit()">
-  <div>
-    <label>Name</label>
-    <input type="text" id="name" [(ngModel)]="article.name" name="name">
-  </div>
-  <div>
-    <label>Category</label>
-    <input type="text" id="category" [(ngModel)]="article.category" name="category">
-  </div>
-  <div>
-    <label>User comment</label>
-    <input type="text" id="userComment" [(ngModel)]="article.userComment" name="userComment">
-  </div>
-  <div>
-    <label>Photo url</label>
-    <input type="text" id="photoUrl" [(ngModel)]="article.photoUrl" name="photoUrl">
-  </div>
-  <button type="submit"></button>
-</form>
+<h3 style="text-align: center">Add Article</h3>
+<mat-stepper [linear]="true" #stepper>
+  <mat-step [stepControl]="nameGroup">
+    <form [formGroup]="nameGroup">
+      <ng-template matStepLabel>Fill out article name</ng-template>
+      <mat-form-field>
+        <mat-label>Article</mat-label>
+        <input matInput placeholder="Name" formControlName="name" required>
+      </mat-form-field>
+      <div *ngIf="nameGroup.get('name')?.invalid && nameGroup.get('name')?.touched" style="color: red">
+        Article name should have at least 10 characters
+      </div>
+      <div>
+        <button mat-button [disabled]="!nameGroup.valid" matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="categoryGroup">
+    <form [formGroup]="categoryGroup">
+      <ng-template matStepLabel>Choose category</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option value="IT">IT</mat-option>
+          <mat-option value="Business">Business</mat-option>
+          <mat-option value="Development">Development</mat-option>
+          <mat-option value="Finance">Finance</mat-option>
+          <mat-option value="Design">Design</mat-option>
+          <mat-option value="Marketing">Marketing</mat-option>
+          <mat-option value="Lifestyle">Lifestyle</mat-option>
+          <mat-option value="Photography">Photography</mat-option>
+          <mat-option value="Health">Health</mat-option>
+          <mat-option value="Music">Music</mat-option>
+          <mat-option value="Teaching">Teaching</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button [disabled]="!categoryGroup.valid" matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="photoGroup">
+    <form [formGroup]="photoGroup">
+      <ng-template matStepLabel>Fill out photo link</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Photo</mat-label>
+        <input matInput formControlName="photoURL" placeholder="url" required>
+      </mat-form-field>
+      <div *ngIf="photoGroup.get('photoURL')?.invalid && photoGroup.get('photoURL')?.touched" style="color: red">
+        Value should be link
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button [disabled]="!photoGroup.valid" matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="userCommentGroup">
+    <form [formGroup]="userCommentGroup">
+      <ng-template matStepLabel>Enter your comment</ng-template>
+      <mat-form-field>
+        <mat-label>Comment area</mat-label>
+        <textarea matInput formControlName="userComment" placeholder="text"></textarea>
+      </mat-form-field>
+      <div *ngIf="userCommentGroup.get('userComment')?.invalid && userCommentGroup.get('userComment')?.touched" style="color: red">
+        Comment area should have at least 10 characters
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button [disabled]="!userCommentGroup.valid" matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-button (click)="onSubmit()">Save
+      </button>
+    </div>
+  </mat-step>
+</mat-stepper>

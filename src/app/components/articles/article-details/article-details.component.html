@@ -1,39 +1,28 @@
-<h3>View Article</h3>
-
-<div>
-  <div>
-    <label><b>Name:</b></label> {{article.name}}
-  </div>
-  <div>
-    <label><b>Rate:</b></label> {{article.rate}}
-  </div>
-  <div>
-    <label><b>Photo:</b></label> {{article.photoUrl}}
-  </div>
-  <div>
-    <label><b>Publication date:</b></label> {{article.publishedDate | date}}
-  </div>
-  <div>
-    <label><b>Category:</b></label> {{article.category}}
-  </div>
-  <div>
-    <label><b>User comment:</b></label> {{article.userComment}}
-  </div>
-  <div>
-    <label><b>Info:</b></label> {{article.user.name}} {{article.user.surname}} {{article.user.userRole}}
-  </div>
-  <div>
-    <label><b>Image:</b></label> {{article.user.imageUrl}}
-  </div>
-  <div>
-    <label><b>Type:</b></label> {{article.articleType}}
-  </div>
+<ng-container>
+  <mat-card>
+    <mat-divider></mat-divider>
+    <mat-card-content style="text-align: right">
+      <span style="color: fuchsia">
+        <button mat-button [disabled]="isClickedUp" (click)="up()"><mat-icon svgIcon="plus-star"></mat-icon></button>
+        <button mat-button [disabled]="isClickedDown" (click)="down()"><mat-icon svgIcon="minus-star"></mat-icon></button>
+          </span>
+      <mat-card-header style="text-align: left">
+        <mat-card-title>{{article.name}}
+          <span style="color: fuchsia">{{article.rate}}
+            <mat-icon svgIcon="rate-star"></mat-icon></span>
+        </mat-card-title>
+        <mat-card-subtitle>{{article.category}} {{article.publishedDate| date}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-title>{{article.user.name}} {{article.user.surname}}</mat-card-title>
+      <mat-card-subtitle>{{article.userComment}}</mat-card-subtitle>
+    </mat-card-content>
+  </mat-card>
   <div *ngFor="let part of article.parts">
-    <div>
-      <label><b>Header:</b></label> {{part.header}}
-    </div>
-    <div>
-      <label><b>Content:</b></label> {{part.text}}
-    </div>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{part.header}}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>{{part.text}}</p>
+    </mat-expansion-panel>
   </div>
-</div>
+</ng-container>
