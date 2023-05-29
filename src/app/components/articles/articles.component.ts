@@ -1,5 +1,5 @@
 import {ArticleService} from "../../services/article.service";
-import {Article} from "../../models/article";
+import {Article} from "../../models/article/article";
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {MatIconRegistry} from "@angular/material/icon";
@@ -50,5 +50,9 @@ export class ArticlesComponent implements OnInit {
 
   viewArticle(id: number) {
     this.router.navigate(['article-details', id]);
+  }
+
+  navigateToCreate() {
+    this.router.navigate(['create-article']);
   }
 }

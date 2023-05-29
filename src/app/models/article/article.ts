@@ -1,4 +1,4 @@
-import {User} from "./user";
+import {User} from "../user";
 import {Part} from "./part";
 
 export class Article {

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Article} from "../../../models/article";
+import {Article} from "../../../models/article/article";
 import {ArticleService} from "../../../services/article.service";
 import {User} from "../../../models/user";
 import {Router} from "@angular/router";
@@ -32,7 +32,6 @@ export class CreateArticleComponent {
 
   constructor(private service: ArticleService, private router: Router, private fb: FormBuilder) {
   }
-
   setValues(): void {
     this.user.id = 1;
     this.article.articleType = 'USER_ARTICLE';
@@ -55,7 +54,7 @@ export class CreateArticleComponent {
 
   saveArticle(): void {
     this.service.createArticle(this.article).subscribe({
-      next: (val) => {
+      next: () => {
         this.redirectToArticlesPage();
       },
       error: (err) => {
@@ -63,4 +62,6 @@ export class CreateArticleComponent {
       }
     });
   }
+
 }
+

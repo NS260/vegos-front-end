@@ -1,9 +1,7 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
 import {AppComponent} from './app.component';
 import {NavbarComponent} from './navigation/navbar/navbar.component';
-import {SidebarComponent} from './navigation/sidebar/sidebar.component';
 import {ArticlesComponent} from './components/articles/articles.component';
 import {CoursesComponent} from './components/courses/courses.component';
 import {MentorsComponent} from './components/mentors/mentors.component';
@@ -26,38 +24,49 @@ import {MatGridListModule} from "@angular/material/grid-list";
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatCardModule} from "@angular/material/card";
 import {MatExpansionModule} from "@angular/material/expansion";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatMenuModule} from "@angular/material/menu";
+import { CreateCourseComponent } from './components/courses/create-course/create-course.component';
+import { UpdateCourseComponent } from './components/courses/update-course/update-course.component';
+import { CourseDetailsComponent } from './components/courses/course-details/course-details.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    SidebarComponent,
     ArticlesComponent,
     CoursesComponent,
     MentorsComponent,
     CreateArticleComponent,
     UpdateArticleComponent,
-    ArticleDetailsComponent
+    ArticleDetailsComponent,
+    CreateCourseComponent,
+    UpdateCourseComponent,
+    CourseDetailsComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    RouterLink,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatChipsModule,
-    MatListModule,
-    MatGridListModule,
-    MatStepperModule,
-    MatCardModule,
-    MatExpansionModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        RouterLink,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatChipsModule,
+        MatListModule,
+        MatGridListModule,
+        MatStepperModule,
+        MatCardModule,
+        MatExpansionModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatMenuModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

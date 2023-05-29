@@ -1,10 +1,31 @@
-<ng-container *ngFor="let article of articles" class="card">
-  <mat-card>
-    <mat-divider></mat-divider>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="navigateToCreate()" class="button-icon">
+    <i class='bx bxs-book-add'></i>
+    <span style="font-size: 1.2rem"> Add article</span>
+  </button>
+</mat-menu>
+<ng-container>
+  <mat-card style="margin: 0 10px 30px 10px;">
+    <mat-card-actions style="justify-content: right">
+      <button mat-icon-button [matMenuTriggerFor]="menu" style="display: flex;">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</ng-container>
+<ng-container *ngFor="let article of articles">
+  <mat-card style="background-color: snow;margin: 0 350px 10px 350px;">
     <mat-card-content style="text-align: right">
+      <mat-card-header style="justify-content: right">
+        <button mat-icon-button [matMenuTriggerFor]="cards" style="display: flex;">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </mat-card-header>
       <mat-card-header style="text-align: left">
-        <mat-card-title>{{article.name}}
-          <span style="color: fuchsia">{{article.rate}}<mat-icon svgIcon="rate-star"></mat-icon> </span>
+        <mat-card-title style="color: cadetblue">
+          {{article.rate}}
+          <mat-icon svgIcon="rate-star"></mat-icon>
+          {{article.name}}
         </mat-card-title>
         <mat-card-subtitle>{{article.category}} {{article.publishedDate| date}}</mat-card-subtitle>
       </mat-card-header>
@@ -12,12 +33,20 @@
       <mat-card-subtitle>{{article.userComment}}</mat-card-subtitle>
     </mat-card-content>
     <mat-card-footer>
-      <mat-card-actions style="justify-content: center">
-        <mat-icon svgIcon="edit-article" (click)="updateArticle(article.id)">Update</mat-icon>
-        <mat-icon svgIcon="delete-article" (click)="deleteArticle(article.id)">Delete</mat-icon>
-        <mat-icon svgIcon="view-article" (click)="viewArticle(article.id)">View</mat-icon>
-      </mat-card-actions>
+      <mat-menu #cards="matMenu">
+        <button mat-menu-item (click)="updateArticle(article.id)">
+          <mat-icon svgIcon="edit-article" class="button-icon"></mat-icon>
+          <span style="font-size: 1.1rem;color: #6e6a70;"> Edit article</span>
+        </button>
+        <button mat-menu-item (click)="deleteArticle(article.id)">
+          <mat-icon svgIcon="delete-article" class="button-icon"></mat-icon>
+          <span style="font-size: 1.1rem;color: #6e6a70;"> Delete article</span>
+        </button>
+        <button mat-menu-item (click)="viewArticle(article.id)">
+          <mat-icon svgIcon="view-article" class="button-icon"></mat-icon>
+          <span style="font-size: 1.1rem;color: #6e6a70;"> View article</span>
+        </button>
+      </mat-menu>
     </mat-card-footer>
   </mat-card>
 </ng-container>
-

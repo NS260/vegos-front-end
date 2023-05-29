@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Article} from "../../../models/article";
+import {Article} from "../../../models/article/article";
 import {ArticleService} from "../../../services/article.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {Part} from "../../../models/part";
+import {Part} from "../../../models/article/part";
 import {MatIconRegistry} from "@angular/material/icon";
 import {DomSanitizer} from "@angular/platform-browser";
 import {Utils} from "../../../utils/Utils";
@@ -84,11 +84,6 @@ export class UpdateArticleComponent implements OnInit {
     this.article.parts.forEach(item => {
       partsArray.push(this.buildGroup(item));
     })
-    this.article.parts.forEach(el => {
-      this.service.removePart(this.id, el.id).subscribe({
-        next: (value) => console.log(value)
-      })
-    })
   }
 
   buildGroup(item: Part): FormGroup {
@@ -101,7 +96,7 @@ export class UpdateArticleComponent implements OnInit {
   onSubmit() {
     this.submit();
     this.service.updateArticleById(this.id, this.article).subscribe({
-      next: (val) => {
+      next: () => {
         this.partsList.forEach(part => {
           this.service.addPart(this.id, part).subscribe({
             error: err => console.error(err)

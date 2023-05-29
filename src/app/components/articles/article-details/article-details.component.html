@@ -2,13 +2,14 @@
   <mat-card>
     <mat-divider></mat-divider>
     <mat-card-content style="text-align: right">
-      <span style="color: fuchsia">
+      <span style="color: cadetblue">
         <button mat-button [disabled]="isClickedUp" (click)="up()"><mat-icon svgIcon="plus-star"></mat-icon></button>
-        <button mat-button [disabled]="isClickedDown" (click)="down()"><mat-icon svgIcon="minus-star"></mat-icon></button>
+        <button mat-button [disabled]="isClickedDown" (click)="down()"><mat-icon
+          svgIcon="minus-star"></mat-icon></button>
           </span>
       <mat-card-header style="text-align: left">
         <mat-card-title>{{article.name}}
-          <span style="color: fuchsia">{{article.rate}}
+          <span style="color: cadetblue">{{article.rate}}
             <mat-icon svgIcon="rate-star"></mat-icon></span>
         </mat-card-title>
         <mat-card-subtitle>{{article.category}} {{article.publishedDate| date}}</mat-card-subtitle>
@@ -20,9 +21,15 @@
   <div *ngFor="let part of article.parts">
     <mat-expansion-panel hideToggle>
       <mat-expansion-panel-header>
-        <mat-panel-title>{{part.header}}</mat-panel-title>
+        <mat-panel-title>{{part.header}}
+          <button mat-button (click)="deletePart(part.id)">
+            <mat-icon svgIcon="delete-article"></mat-icon>
+          </button>
+        </mat-panel-title>
       </mat-expansion-panel-header>
+
       <p>{{part.text}}</p>
     </mat-expansion-panel>
+
   </div>
 </ng-container>

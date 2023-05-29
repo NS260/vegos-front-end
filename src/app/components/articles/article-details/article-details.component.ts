@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Article} from "../../../models/article";
+import {Article} from "../../../models/article/article";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ArticleService} from "../../../services/article.service";
 import {MatIconRegistry} from "@angular/material/icon";
@@ -36,10 +36,19 @@ export class ArticleDetailsComponent implements OnInit {
     });
   }
 
+  deletePart(id: number) {
+    this.service.removePart(this.id, id).subscribe({
+      next: () => {
+        this.router.navigate(['article-details', this.id]);
+      },
+      error: err => console.log(err)
+    })
+  }
+
   up() {
     this.article.rate += 1;
     this.service.updateArticleById(this.id, this.article).subscribe({
-      next: value => {
+      next: () => {
         this.click();
         this.router.navigate(['article-details', this.id]);
       }
@@ -49,7 +58,7 @@ export class ArticleDetailsComponent implements OnInit {
   down() {
     this.article.rate -= 1;
     this.service.updateArticleById(this.id, this.article).subscribe({
-      next: value => {
+      next: () => {
         this.click();
         this.router.navigate(['article-details', this.id]);
       }

@@ -1,44 +1,62 @@
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-<nav class="navbar">
-  <div class="logo">
-    <a href="#"><i class='bx bx-menu'></i></a>
-    <a href="#"><i class='bx bx-wind'></i> Vegos</a></div>
-  <ul class="icons">
-    <li><input type="search" class="search-field" placeholder="Search ..."/></li>
-    <li>
-      <button class="message-icon" onclick="showDropdown('.message-dropdown-content')"><i class='bx bxs-chat noti'></i>
+<nav>
+  <mat-drawer #drawer class="example-sidenav">
+    <mat-list>
+      <mat-list-item>
+        <button type="button" mat-button (click)="drawer.toggle()" class="button-icon">
+          <i class='bx bx-menu'></i>
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <a routerLink="/" class="button-icon"><i class='bx bxs-home'></i> Home</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a routerLink="articles" class="button-icon"><i class='bx bxs-notepad'></i> Articles</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a routerLink="courses" class="button-icon"><i class='bx bxs-graduation'></i> Courses</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a routerLink="mentors" class="button-icon"><i class='bx bxs-user'></i> Mentors</a>
+      </mat-list-item>
+    </mat-list>
+  </mat-drawer>
+  <mat-drawer-container class="example-container" autosize>
+    <div class="example-sidenav-content">
+      <button type="button" mat-button (click)="drawer.toggle()" class="button-icon">
+        <i class='bx bx-menu'></i>
       </button>
-      <div class="message-dropdown-content dropdown-content">
-        <a>Message folder is empty</a>
-      </div>
-    </li>
-    <li>
-      <button class="notification-icon" onclick="showDropdown('.notification-dropdown-content')"><i
-        class='bx bxs-bell noti'></i></button>
-      <div class="notification-dropdown-content dropdown-content">
-        <a>Notification folder is empty</a>
-      </div>
-    </li>
-    <li>
-      <button class="profile-icon" onclick="showDropdown('.profile-dropdown-content')"><i
-        class='bx bxs-user-circle'></i></button>
-      <div class="profile-dropdown-content dropdown-content">
-        <a href="#"><i class='bx bxs-user'> Profile</i></a>
-        <a href="#"><i class='bx bxs-flag-alt'> Language</i></a>
-        <a href="#"><i class='bx bxs-sun'> Theme</i></a>
-        <a href="#"><i class='bx bxs-cog'> Settings</i></a>
-      </div>
-    </li>
-  </ul>
+      <button type="button" mat-button class="button-icon">
+        <a href="#"> <i class='bx bxl-xing'></i><span style="text-decoration: none">Vegos</span></a>
+      </button>
+      <button type="button" mat-button class="button-icon">
+        <input type="search" class="search-field" placeholder="Search ..."/>
+      </button>
+      <button type="button" mat-button [matMenuTriggerFor]="messages" class="button-icon"><i class='bx bxs-chat noti'></i></button>
+      <button type="button" mat-button [matMenuTriggerFor]="notifications" class="button-icon"><i class='bx bxs-bell noti'></i></button>
+      <button type="button" mat-button [matMenuTriggerFor]="profile" class="button-icon"><i class='bx bxs-user'></i></button>
+    </div>
+  </mat-drawer-container>
 </nav>
+<br><br><br>
+<mat-menu #messages="matMenu" style="margin: 10px">
+  <p mat-menu-item>No new messages</p>
+</mat-menu>
+<mat-menu #notifications="matMenu">
+  <p mat-menu-item>No new notifications</p>
+</mat-menu>
+<mat-menu #profile="matMenu">
+  <button mat-menu-item>Profile</button>
+  <button mat-menu-item [matMenuTriggerFor]="languages">Languages</button>
+  <button mat-menu-item [matMenuTriggerFor]="theme">Themes</button>
+  <button mat-menu-item>Settings</button>
+</mat-menu>
+<mat-menu #languages="matMenu">
+  <button mat-menu-item>English</button>
+  <button mat-menu-item>Українська</button>
+</mat-menu>
 
-<div>
-  <ul>
-    <li>
-      <a routerLink="articles">Articles</a>
-    </li>
-    <li>
-      <a routerLink="create-article">Add Article</a>
-    </li>
-  </ul>
-</div>
+<mat-menu #theme="matMenu">
+  <button mat-menu-item>Light</button>
+  <button mat-menu-item>Dark</button>
+</mat-menu>
