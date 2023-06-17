@@ -1,1 +1,153 @@
-<p>course-details works!</p>
+<ng-container>
+  <mat-card style="margin: 20px 100px 50px 100px">
+    <mat-divider></mat-divider>
+    <mat-card-content style="text-align: right">
+      <span style="color: cadetblue">
+        <button mat-button [disabled]="isClickedUp" (click)="up()">
+          <mat-icon>
+            <i class='bx bxs-like' style='color:#6e6a70'></i>
+          </mat-icon>
+        </button>
+        <button mat-button [disabled]="isClickedDown" (click)="down()">
+          <mat-icon>
+            <i class='bx bxs-dislike' style='color:#6e6a70'></i>
+          </mat-icon>
+        </button>
+          </span>
+      <mat-card-header style="text-align: left">
+        <mat-card-title>
+          {{course.name}}
+          <span style="color:cadetblue;">
+            {{course.rate}}
+            <mat-icon><i class='bx bxs-star'></i></mat-icon>
+          </span>
+        </mat-card-title>
+        <mat-card-subtitle> {{course.category}} {{course.createDate | date}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-title> {{course.mentor.user.name}} {{course.mentor.user.surname}}</mat-card-title>
+      <mat-card-subtitle>{{course.shortDescription}}</mat-card-subtitle>
+    </mat-card-content>
+  </mat-card>
+  <mat-card style="margin: 20px 100px 50px 100px">
+    <mat-card-title style="text-align: center">Information</mat-card-title>
+    <mat-card-content style="display:flex;flex-direction: column;margin: 10px 0 0 0">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Details</mat-panel-title>
+        </mat-expansion-panel-header>
+        {{course.courseDetails.description}}
+        <mat-divider></mat-divider>
+        Duration: {{course.length}}
+        <mat-divider></mat-divider>
+        Basic Language: {{course.language}}
+        <mat-divider></mat-divider>
+        Recommended Age: {{course.courseDetails.ageGroup}}
+      </mat-expansion-panel>
+      <mat-expansion-panel *ngIf="isPricesEmpty()">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Prices</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div *ngFor="let price of course.priceDetails">
+          {{price.classType}} : {{price.price}}
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Options</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card-subtitle>
+          Individual Lesson: {{course.courseFeatures.hasIndividualLesson}}
+          <mat-divider></mat-divider>
+          Night lesson: {{course.courseFeatures.hasNightLesson}}
+          <mat-divider></mat-divider>
+          Class lesson: {{course.courseFeatures.hasGroupLesson}}
+          <mat-divider></mat-divider>
+          Demo lesson: {{course.courseFeatures.hasDemoLesson}}
+          <mat-divider></mat-divider>
+          Day lesson: {{course.courseFeatures.hasDayLesson}}
+        </mat-card-subtitle>
+      </mat-expansion-panel>
+    </mat-card-content>
+  </mat-card>
+  <mat-card style="margin: 20px 100px 50px 100px" *ngIf="isStructureEmpty()">
+    <mat-card-title style="text-align: center">Structure</mat-card-title>
+    <mat-card-content *ngFor="let header of course.courseDetails.courseStructure.structureThemes">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{header.name}}</mat-panel-title>
+          <mat-panel-description></mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngFor="let content of header.structureSubThemes">
+          <mat-card-subtitle>
+            -- {{content.name}} {{content.time}} minutes.
+          </mat-card-subtitle>
+        </div>
+      </mat-expansion-panel>
+    </mat-card-content>
+  </mat-card>
+  <mat-card style="margin: 20px 100px 50px 100px">
+    <mat-card-content style="text-align: right">
+      <span style="color: cadetblue">
+        <button mat-raised-button (click)="openQuestionForm()">Ask</button></span>
+      <mat-card-title style="text-align: center">Questions</mat-card-title>
+    </mat-card-content>
+    <mat-card-content *ngFor="let question of course.courseDetails.question">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> {{question.askedDate | date}}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-divider></mat-divider>
+        <mat-card-title>{{question.text}}</mat-card-title>
+        <mat-card-subtitle>{{question.student.user.name}} {{question.student.user.surname}}</mat-card-subtitle>
+        <mat-divider></mat-divider>
+        <mat-card-header>{{question.answer.answeredDate | date}} </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-title>{{question.answer.text}}</mat-card-title> <mat-card-subtitle>{{question.answer.mentor.user.name}} {{question.answer.mentor.user.surname}}</mat-card-subtitle>
+      </mat-expansion-panel>
+    </mat-card-content>
+  </mat-card>
+  <mat-card style="margin: 20px 100px 50px 100px">
+    <mat-card-content style="text-align: right">
+      <span style="color: cadetblue">
+        <button mat-raised-button (click)="openReviewForm()">Add</button></span>
+      <mat-card-title style="text-align: center">Reviews</mat-card-title>
+    </mat-card-content>
+    <mat-card-content *ngFor="let review of course.courseDetails.reviews">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{review.student.user.name}} {{review.student.user.surname}}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card-subtitle>{{review.text}}</mat-card-subtitle>
+        <mat-expansion-panel style="display:flex;flex-direction: row;margin: 10px 0 0 0">
+          <mat-expansion-panel-header>
+            <mat-panel-title>Rates</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-card-subtitle *ngFor="let rate of review.rates">
+            {{rate.type}} : {{rate.value}}
+          </mat-card-subtitle>
+        </mat-expansion-panel>
+      </mat-expansion-panel>
+    </mat-card-content>
+  </mat-card>
+  <mat-card style="margin: 20px 100px 250px 100px" *ngIf="isClassesEmpty()">
+    <mat-card-title style="text-align: center">Classes</mat-card-title>
+    <div style="display: flex;flex-direction: column" *ngFor="let group of course.courseDetails.classes;">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{group.name}}</mat-panel-title>
+          <mat-panel-description>{{group.classType}} {{group.size}}</mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-card-subtitle style="text-align: center">
+          <div style="margin: 0 0 40px 0">
+            Start: {{group.startDate | date}}
+            <mat-divider></mat-divider>
+            End: {{group.endDate | date}}
+            <mat-divider></mat-divider>
+          </div>
+          <button mat-raised-button (click)="enrollToGroup(group.id)">Enroll</button>
+          <button mat-raised-button (click)="showGroup(group.id)">Show</button>
+        </mat-card-subtitle>
+      </mat-expansion-panel>
+    </div>
+  </mat-card>
+</ng-container>

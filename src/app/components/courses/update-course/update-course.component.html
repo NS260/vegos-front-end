@@ -1,1 +1,229 @@
-<p>update-course works!</p>
+<h3 style="text-align: center;color: white">Edit Course</h3>
+<mat-stepper [linear]="false" #stepper style="margin: 0 10px 0 10px">
+  <mat-step [stepControl]="courseInfoGroup">
+    <form [formGroup]="courseInfoGroup" style="display: flex;flex-direction: column;align-items: flex-start;">
+      <ng-template matStepLabel>Fill out course basic info</ng-template>
+      <mat-form-field>
+        <mat-label>Course</mat-label>
+        <input matInput placeholder="Name" formControlName="name" required>
+      </mat-form-field>
+      <div *ngIf="courseInfoGroup.get('name')?.invalid && courseInfoGroup.get('name')?.touched" style="color: red">
+        Course name should have at least 10 characters
+      </div>
+      <mat-form-field>
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option value="IT">IT</mat-option>
+          <mat-option value="Business">Business</mat-option>
+          <mat-option value="Development">Development</mat-option>
+          <mat-option value="Finance">Finance</mat-option>
+          <mat-option value="Design">Design</mat-option>
+          <mat-option value="Marketing">Marketing</mat-option>
+          <mat-option value="Lifestyle">Lifestyle</mat-option>
+          <mat-option value="Photography">Photography</mat-option>
+          <mat-option value="Health">Health</mat-option>
+          <mat-option value="Music">Music</mat-option>
+          <mat-option value="Teaching">Teaching</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Photo</mat-label>
+        <input matInput placeholder="url" formControlName="photoURL" required>
+      </mat-form-field>
+      <div *ngIf="courseInfoGroup.get('photoURL')?.invalid && courseInfoGroup.get('photoURL')?.touched"
+           style="color: red">
+        Value should be link
+      </div>
+      <mat-form-field>
+        <mat-label>Short Description</mat-label>
+        <textarea matInput formControlName="shortDesc" placeholder="text"></textarea>
+      </mat-form-field>
+      <div *ngIf="courseInfoGroup.get('shortDesc')?.invalid && courseInfoGroup.get('shortDesc')?.touched"
+           style="color: red">
+        Description should have at least 10 characters
+      </div>
+      <mat-form-field>
+        <mat-label>Length</mat-label>
+        <input matInput placeholder="Ex: 2 month" formControlName="length" required>
+      </mat-form-field>
+      <div *ngIf="courseInfoGroup.get('length')?.invalid && courseInfoGroup.get('length')?.touched" style="color: red">
+        Length should have at least 5 characters
+      </div>
+      <mat-form-field>
+        <mat-label>Language</mat-label>
+        <mat-select formControlName="language">
+          <mat-option value="English">English</mat-option>
+          <mat-option value="Ukrainian">Ukrainian</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Age group</mat-label>
+        <mat-select formControlName="ageGroup">
+          <mat-option value="Child">Child</mat-option>
+          <mat-option value="Teen">Teen</mat-option>
+          <mat-option value="Adult">Adult</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button [disabled]="!courseInfoGroup.valid" matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="courseDetailsGroup">
+    <form [formGroup]="courseDetailsGroup" style="display: flex;flex-direction: row;align-items: flex-start">
+      <ng-template matStepLabel>Fill out course details info</ng-template>
+      <form formGroupName="infoGroup" style="display:flex;flex-direction: column;align-items: flex-start">
+        <mat-form-field>
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="desc" placeholder="text" rows="11"></textarea>
+        </mat-form-field>
+        <div
+          *ngIf="courseDetailsGroup.controls.infoGroup.get('desc')?.invalid && courseDetailsGroup.controls.infoGroup.get('desc')?.touched"
+          style="color: red">
+          Description should have at least 25 characters
+        </div>
+        <mat-form-field>
+          <mat-label>Welcome video</mat-label>
+          <input matInput placeholder="url" formControlName="welcomeVideo" required>
+        </mat-form-field>
+        <div
+          *ngIf="courseDetailsGroup.controls.infoGroup.get('welcomeVideo')?.invalid && courseDetailsGroup.controls.infoGroup.get('welcomeVideo')?.touched"
+          style="color: red">
+          Value should be link
+        </div>
+      </form>
+      <form formGroupName="optionsGroup" style="display: flex;flex-direction: column;padding-left: 25px">
+        <mat-form-field>
+          <mat-label>Has demo lesson</mat-label>
+          <mat-select formControlName="hasDemoLesson">
+            <mat-option value="Yes">Yes</mat-option>
+            <mat-option value="No">No</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Has group lesson</mat-label>
+          <mat-select formControlName="hasGroupLesson">
+            <mat-option value="Yes">Yes</mat-option>
+            <mat-option value="No">No</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Has individual lesson</mat-label>
+          <mat-select formControlName="hasIndividualLesson">
+            <mat-option value="Yes">Yes</mat-option>
+            <mat-option value="No">No</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Has day lesson</mat-label>
+          <mat-select formControlName="hasDayLesson">
+            <mat-option value="Yes">Yes</mat-option>
+            <mat-option value="No">No</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Has night lesson</mat-label>
+          <mat-select formControlName="hasNightLesson">
+            <mat-option value="Yes">Yes</mat-option>
+            <mat-option value="No">No</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+      <form formGroupName="priceGroup" style="display: flex;flex-direction: column;padding-left: 30px">
+        <ng-container formArrayName="prices">
+          <mat-label style="text-align: center;color: #6e6a70">Prices</mat-label>
+          <ng-container *ngFor="let price of prices.controls;let id = index">
+            <div [formGroupName]="id">
+              <mat-icon (click)="deletePrice(id)" style="color: #6e6a70;"><i class='bx bxs-message-square-minus'></i>
+              </mat-icon>
+              <mat-divider></mat-divider>
+              <mat-form-field>
+                <mat-label>Type</mat-label>
+                <mat-select formControlName="classType" required>
+                  <mat-option value="GROUP">Class</mat-option>
+                  <mat-option value="INDIVIDUAL">Individual</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-divider></mat-divider>
+              <mat-form-field>
+                <mat-label>Price</mat-label>
+                <input matInput formControlName="price" required>
+              </mat-form-field>
+              <div *ngIf="price.get('price')?.invalid && price.get('price')?.touched" style="color: red">
+                Price should be positive
+              </div>
+            </div>
+
+          </ng-container>
+          <mat-icon (click)="addPrice()" style="color: #6e6a70"><i class='bx bxs-message-square-add'></i></mat-icon>
+        </ng-container>
+      </form>
+    </form>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button
+              [disabled]="!courseDetailsGroup.controls.infoGroup.valid"
+              matStepperNext>Next
+      </button>
+    </div>
+  </mat-step>
+<!--  <mat-step>-->
+<!--    <ng-template matStepLabel>Add structure</ng-template>-->
+<!--  </mat-step>-->
+<!--  <mat-step [stepControl]="group">-->
+<!--    <ng-template matStepLabel>Add classes</ng-template>-->
+<!--    <form [formGroup]="group" style="display: flex;flex-direction: column">-->
+<!--      <ng-container formArrayName="classes">-->
+<!--        <mat-label style="text-align: center;color: #6e6a70">Classes</mat-label>-->
+<!--        <ng-container *ngFor="let group of classes.controls;let id = index">-->
+<!--          <div [formGroupName]="id">-->
+<!--            <mat-icon (click)="deleteClass(id)" style="color: #6e6a70;"><i class='bx bxs-message-square-minus'></i>-->
+<!--            </mat-icon>-->
+<!--            <mat-divider></mat-divider>-->
+<!--            <mat-form-field>-->
+<!--              <mat-label>Name</mat-label>-->
+<!--              <input matInput formControlName="name">-->
+<!--            </mat-form-field>-->
+<!--            <mat-form-field>-->
+<!--              <mat-label>Choose start date</mat-label>-->
+<!--              <input matInput [matDatepicker]="datep1" formControlName="startDate">-->
+<!--              <mat-hint>MM/DD/YYYY</mat-hint>-->
+<!--              <mat-datepicker-toggle matIconSuffix [for]="datep1"></mat-datepicker-toggle>-->
+<!--              <mat-datepicker #datep1></mat-datepicker>-->
+<!--            </mat-form-field>-->
+<!--            <mat-form-field>-->
+<!--              <mat-label>Choose end date</mat-label>-->
+<!--              <input matInput [matDatepicker]="datep2" formControlName="endDate">-->
+<!--              <mat-hint>MM/DD/YYYY</mat-hint>-->
+<!--              <mat-datepicker-toggle matIconSuffix [for]="datep2"></mat-datepicker-toggle>-->
+<!--              <mat-datepicker #datep2></mat-datepicker>-->
+<!--            </mat-form-field>-->
+<!--            <mat-form-field>-->
+<!--              <mat-label>Type</mat-label>-->
+<!--              <mat-select formControlName="classType" required>-->
+<!--                <mat-option value="GROUP">Group</mat-option>-->
+<!--                <mat-option value="INDIVIDUAL">Individual</mat-option>-->
+<!--              </mat-select>-->
+<!--            </mat-form-field>-->
+<!--            <mat-form-field>-->
+<!--              <mat-label>Places</mat-label>-->
+<!--              <input matInput formControlName="size">-->
+<!--            </mat-form-field>-->
+<!--          </div>-->
+<!--        </ng-container>-->
+<!--        <mat-icon (click)="addClass()" style="color: #6e6a70">-->
+<!--          <i class='bx bxs-message-square-add'></i></mat-icon>-->
+<!--      </ng-container>-->
+<!--    </form>-->
+<!--  </mat-step>-->
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-button (click)="onSubmit()">Save
+      </button>
+    </div>
+  </mat-step>
+</mat-stepper>

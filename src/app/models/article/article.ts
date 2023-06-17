@@ -4,7 +4,7 @@ import {Part} from "./part";
 export class Article {
   id!: number
   articleType!: string
-  category?: string
+  category?: string | null | undefined
   name?: string | null
   publishedDate?: string
   userComment!: string | null | undefined

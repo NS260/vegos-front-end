@@ -1,1 +1,51 @@
-<p>courses works!</p>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="navigateToCreate()" class="button-icon" style="color: #6e6a70;">
+    <i class='bx bxs-book-add'></i>
+    <span style="font-size: 1.2rem"> Add course</span>
+  </button>
+</mat-menu>
+<ng-container>
+  <mat-card style="margin: 0 10px 30px 10px;">
+    <mat-card-actions style="justify-content: right">
+      <button mat-icon-button [matMenuTriggerFor]="menu" style="display: flex;">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</ng-container>
+<ng-container *ngFor="let course of courses">
+  <mat-card style="background-color: snow;margin: 0 150px 20px 150px;position: relative;justify-content: center">
+    <mat-card-content style="text-align: right">
+      <mat-card-header style="text-align: left">
+        <mat-card-title style="color: cadetblue">
+          {{course.rate}}
+          <mat-icon><i class='bx bxs-star'></i></mat-icon>
+          {{course.name}}
+        </mat-card-title>
+        <mat-card-subtitle>{{course.category}} {{course.createDate| date}}</mat-card-subtitle>
+        <button mat-icon-button [matMenuTriggerFor]="cards" style="display: flex;align-self: center;">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </mat-card-header>
+      <mat-card-subtitle style="color: cadetblue">
+        {{course.language}} {{course.length}}
+      </mat-card-subtitle>
+      <mat-card-content style="text-align: center">{{course.shortDescription}}</mat-card-content>
+      <mat-card-title>{{course.mentor.user.name}} {{course.mentor.user.surname}}</mat-card-title>
+      <mat-card-subtitle>{{course.mentor.user.jobTitle}}</mat-card-subtitle>
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-menu #cards="matMenu">
+        <button mat-menu-item (click)="updateCourse(course.id)">
+          <span style="font-size: 1.1rem;color: #6e6a70;"> Edit course</span>
+        </button>
+        <button mat-menu-item (click)="deleteCourse(course.id)">
+          <span style="font-size: 1.1rem;color: #6e6a70;"> Delete course</span>
+        </button>
+        <button mat-menu-item (click)="viewArticle(course.id)">
+          <span style="font-size: 1.1rem;color: #6e6a70;"> View course</span>
+        </button>
+      </mat-menu>
+    </mat-card-footer>
+  </mat-card>
+</ng-container>

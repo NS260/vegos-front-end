@@ -1,0 +1,19 @@
+<mat-card style="display: flex;margin: 200px 560px 0 560px;color:snow;">
+  <mat-card-header style="justify-content: center;font-size: 1.4rem;color: #6e6a70">Login</mat-card-header>
+  <form [formGroup]="form" style="align-items: center; display:flex; flex-direction: column;margin: 30px 0 10px 0" (ngSubmit)="navigateToHomePage()">
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="email" formControlName="email" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="password" formControlName="password" required>
+    </mat-form-field>
+    <mat-card-subtitle>
+      <button mat-button style="color: #6e6a70" (click)="navigateToRegisterPage()">
+        You are not registered?
+      </button>
+    </mat-card-subtitle>
+    <button mat-button [disabled]="!form.valid" type="submit">Submit</button>
+  </form>
+</mat-card>

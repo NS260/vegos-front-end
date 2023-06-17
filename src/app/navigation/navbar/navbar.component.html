@@ -32,9 +32,12 @@
       <button type="button" mat-button class="button-icon">
         <input type="search" class="search-field" placeholder="Search ..."/>
       </button>
-      <button type="button" mat-button [matMenuTriggerFor]="messages" class="button-icon"><i class='bx bxs-chat noti'></i></button>
-      <button type="button" mat-button [matMenuTriggerFor]="notifications" class="button-icon"><i class='bx bxs-bell noti'></i></button>
-      <button type="button" mat-button [matMenuTriggerFor]="profile" class="button-icon"><i class='bx bxs-user'></i></button>
+      <button type="button" mat-button [matMenuTriggerFor]="messages" class="button-icon"><i
+        class='bx bxs-chat noti'></i></button>
+      <button type="button" mat-button [matMenuTriggerFor]="notifications" class="button-icon"><i
+        class='bx bxs-bell noti'></i></button>
+      <button type="button" mat-button [matMenuTriggerFor]="profile" class="button-icon"><i class='bx bxs-user'></i>
+      </button>
     </div>
   </mat-drawer-container>
 </nav>
@@ -46,7 +49,7 @@
   <p mat-menu-item>No new notifications</p>
 </mat-menu>
 <mat-menu #profile="matMenu">
-  <button mat-menu-item>Profile</button>
+  <button mat-menu-item><a routerLink="sign-in">Profile</a></button>
   <button mat-menu-item [matMenuTriggerFor]="languages">Languages</button>
   <button mat-menu-item [matMenuTriggerFor]="theme">Themes</button>
   <button mat-menu-item>Settings</button>

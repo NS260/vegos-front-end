@@ -31,7 +31,7 @@ export class ArticleDetailsComponent implements OnInit {
       next: val => {
         this.article = val;
         this.oldRate = val.rate;
-        this.article.category = Utils.mapString(val.category);
+        this.article.category = Utils.mapStringToCorrectUserView(val.category);
       }
     });
   }

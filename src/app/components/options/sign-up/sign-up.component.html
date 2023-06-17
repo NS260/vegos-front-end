@@ -1,0 +1,78 @@
+<mat-stepper #stepper style="margin: 25px 0 0 0;color: snow;background-color: cadetblue" [linear]="true">
+  <mat-step [stepControl]="infoGroup">
+    <form [formGroup]="infoGroup" style="display: flex;flex-direction: column;align-items: center">
+      <ng-template matStepLabel><p style="color: snow">Basic Info</p></ng-template>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="name" formControlName="name" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Surname</mat-label>
+        <input matInput placeholder="surname" formControlName="surname" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="email" formControlName="email" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Mobile phone</mat-label>
+        <input matInput placeholder="+38 *** ** ** ***" formControlName="mobilePhone">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Age</mat-label>
+        <input matInput placeholder="age" formControlName="age" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role">
+          <mat-option value="Student">Student</mat-option>
+          <mat-option value="Mentor">Mentor</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Language</mat-label>
+        <mat-select formControlName="language">
+          <mat-option value="English">English</mat-option>
+          <mat-option value="Ukrainian">Ukrainian</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+    <div style="text-align: center">
+      <button mat-button [disabled]="!infoGroup.valid" matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step [stepControl]="detailsGroup">
+    <ng-template matStepLabel>Details info</ng-template>
+    <form [formGroup]="detailsGroup" style="display: flex;flex-direction: column;align-items: center">
+      <mat-form-field>
+        <mat-label>Info</mat-label>
+        <textarea matInput formControlName="info" placeholder="Content..."></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Status</mat-label>
+        <input matInput placeholder="status" formControlName="status">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Job</mat-label>
+        <input matInput placeholder="job" formControlName="jobTitle">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Image</mat-label>
+        <input matInput placeholder="Image" formControlName="imageUrl">
+      </mat-form-field>
+    </form>
+    <div style="text-align: center">
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button [disabled]="!detailsGroup.valid" matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Complete</ng-template>
+    <div>
+      <p>
+        Register completed
+      </p>
+      <button mat-button (click)="navigateToHomePage()">Submit</button>
+    </div>
+  </mat-step>
+</mat-stepper>

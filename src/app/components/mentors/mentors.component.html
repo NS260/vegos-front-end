@@ -1,1 +1,18 @@
-<p>mentors works!</p>
+<ng-container *ngFor="let user of users">
+  <ng-container *ngIf="isMentor(user)">
+    <mat-card style="background-color: snow;margin: 0 150px 10px 150px;">
+      <mat-card-content style="text-align: right">
+        <mat-card-header style="text-align: left">
+          <mat-card-title style="color: cadetblue">
+            {{user.name}} {{user.surname}}
+          </mat-card-title>
+          <mat-card-subtitle>{{user.mobilePhone}}
+            <mat-divider></mat-divider>
+            {{user.email}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-title>{{user.jobTitle}}</mat-card-title>
+        <mat-card-subtitle>{{user.info}}</mat-card-subtitle>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</ng-container>

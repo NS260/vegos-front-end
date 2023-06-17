@@ -33,7 +33,7 @@ export class CreateArticleComponent {
   constructor(private service: ArticleService, private router: Router, private fb: FormBuilder) {
   }
   setValues(): void {
-    this.user.id = 1;
+    this.user.id = 16;
     this.article.articleType = 'USER_ARTICLE';
     this.article.rate = 1;
     this.article.user = this.user;

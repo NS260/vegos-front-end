@@ -56,7 +56,6 @@ export class UpdateArticleComponent implements OnInit {
       text: ['', [Validators.required, Validators.minLength(15)]]
     });
     this.parts.push(partGroup);
-    console.log(this.parts);
   }
 
   deletePart(id: number) {
@@ -69,10 +68,10 @@ export class UpdateArticleComponent implements OnInit {
       next: (val) => {
         this.article = val;
         this.nameGroup.patchValue({name: val.name});
-        this.categoryGroup.patchValue({category: Utils.mapString(val.category)});
+        this.categoryGroup.patchValue({category: Utils.mapStringToCorrectUserView(val.category)});
         this.photoGroup.patchValue({photoURL: val.photoUrl});
         this.userCommentGroup.patchValue({userComment: val.userComment});
-        this.article.category = Utils.mapString(val.category);
+        this.article.category = Utils.mapStringToCorrectUserView(val.category);
         this.setArray();
       },
       error: (err) => console.log(err)
@@ -115,7 +114,6 @@ export class UpdateArticleComponent implements OnInit {
     for (const control of this.parts.controls) {
       this.partsList.push(new Part(control.get('header')?.value, control.get('text')?.value));
     }
-
   }
 
   redirectToArticlesPage() {

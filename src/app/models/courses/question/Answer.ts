@@ -1,8 +1,8 @@
-import {User} from "../../user";
+import {Mentor} from "../../Mentor";
 
 export class Answer{
   id!: number
   text!: string
-  mentor!: User
+  mentor!: Mentor
   answeredDate!: string
 }

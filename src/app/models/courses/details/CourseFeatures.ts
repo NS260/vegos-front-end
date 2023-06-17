@@ -1,10 +1,10 @@
 export class CourseFeatures{
-  hasDemoLesson!: boolean
-  hasGroupLesson!: boolean
-  hasIndividualLesson!: boolean
-  hasDayLesson!: boolean
-  hasNightLesson!: boolean
-  active!: boolean
-  locked!: boolean
-  closed!: boolean
+  hasDemoLesson: any
+  hasGroupLesson: any
+  hasIndividualLesson: any
+  hasDayLesson: any
+  hasNightLesson: any
+  active: any
+  locked: any
+  closed: any
 }

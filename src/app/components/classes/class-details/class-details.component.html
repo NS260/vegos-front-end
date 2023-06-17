@@ -1,0 +1,49 @@
+<mat-card style="margin: 20px 100px 50px 100px">
+  <mat-divider></mat-divider>
+  <mat-card-content style="text-align: right">
+    <mat-card-header style="text-align: left">
+      <mat-card-title>
+        {{group.name}}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{group.startDate | date}}
+        <mat-divider></mat-divider>
+        {{group.endDate | date}}
+      </mat-card-subtitle>
+    </mat-card-header>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Students</mat-card-title>
+  </mat-card-header>
+</mat-card>
+<mat-table [dataSource]="data">
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> No.</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.user.name}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="surname">
+    <mat-header-cell *matHeaderCellDef> Surname</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.user.surname}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="role">
+    <mat-header-cell *matHeaderCellDef> Role</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.user.userRole}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.user.status}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="language">
+    <mat-header-cell *matHeaderCellDef> Language</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.user.language}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
